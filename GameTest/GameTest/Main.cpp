@@ -1,50 +1,15 @@
+
 #include <iostream>
-#include <string>
-#include <fstream>
-#include <cstdlib>
-
-using std::ofstream;
-using std::ifstream;
-
-using std::cout;
-using std::cin;
-using std::string;
+#include "MainGame.h"
 
 
-int main()
+int main(int argc, char** argv)
 {
-	ofstream outputFile;
-	ifstream inputFile;
+	MainGame mainGame;
+	mainGame.run();
 
-	/*outputFile.open("testFile.txt");
-	if (outputFile.fail()) {
-		perror("testFile.txt");
-		return 1;
-	}
-	outputFile << "Hello world\n";
-	outputFile.close();*/
-
-	inputFile.open("testFile.txt");
-	if (inputFile.fail()) {
-		perror("testFile.txt");
-			return 1;
-	}
-
-	string input;
-	while (inputFile >> input) {
-
-
-		
-		getline(inputFile, input);
-		cout << input << endl;
-	}
-	
-
-
-
-
-	system("PAUSE");
 
 
 	return 0;
 }
+
