@@ -149,12 +149,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Errors.cpp" />
+    <ClCompile Include="GLSLProgram.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="material.cpp" />
     <ClCompile Include="Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Errors.h" />
+    <ClInclude Include="GLSLProgram.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="material.hpp" />
     <ClInclude Include="Sprite.h" />

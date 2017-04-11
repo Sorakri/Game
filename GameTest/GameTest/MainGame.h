@@ -3,6 +3,9 @@
 #include <SDL/SDL.h>
 #include <GL/glew.h>
 #include <iostream>
+
+
+#include "GLSLProgram.h"
 #include "Sprite.h"
 
 
@@ -20,6 +23,7 @@ public:
 
 private:
 	void initSystems();
+	void initShaders();
 	void processInput();
 	void gameLoop();
 	void drawGame();
@@ -30,6 +34,8 @@ private:
 	GameState _gameState;
 
 	Sprite _sprite;
+
+	GLSLProgram _colorProgram;
 
 };
 

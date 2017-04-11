@@ -1,3 +1,84 @@
+Crafting Process for smithing:
+
+temperature is not simple selection, player will have to help keep forge at temp.(easy minigame thingy)
+
+smelting:
+	materials selected to create an bar/ingot
+		primary material selected
+		secondary material selected
+		flux/other, don't know what to name it. 
+		percentage distribution of materials and number of bars to form (eg 50,50 or 80,10,10);
+	smelting process: 
+		decide temperature to smelt at
+		amount of time to take
+		results in alloy ingot(s)
+
+
+forging:
+	select what to make, eg axe head, sword blade, handle, etc.
+	depending on what is being made, select some amount of alloy bars/ingots.
+	process ingots:
+		decide forging temperature;
+	heat treatment of result:
+		select temperature to reach for heat-treating
+		select what to quench piece in, eg: water, oil, ice elemental, etc
+		hardening/annealing??
+
+weapon class:
+	int 	type 						//longsword, dagger, etc.
+	float 	weight						// weight of weapon, gotten from weight of all parts.
+	
+	
+	float 	attack speed 				//based on weight, weapon type, and player stats
+	int 	pysical damage type			//piercing, blunt, or slashing type, depends on weapon type.
+	float	physical damage				//amount of damage done by weapon
+	int 	magic damage type[]			//type of magic damage dealt
+	float 	magic damage[]				//amount of magical damage, depends on materials /process for blade	
+	int		passive effects[]			//passive effects of weapon
+	float 	status effects[]			//status effect on the weapon, paralyze, bleed, etc.
+	float	magic channeling			//how well weapon can be used to channel magic for spells.
+	
+armor class:
+	int 	type						//helm, chest, gloves, etc.
+	int		style						//chain, plate, leather, etc.
+	float 	weight						//weight of the armor piece.
+	float	pyshical resist[]			//array of floats for physical resistances
+	float	magical resistance[]		//array of floats for magical resistances.
+	float	status resistance[]			//array of floats for status resistances
+	float	magic channeling			//how well meagi can be channeled through armor.
+	int 	passive effects[]			//passive effects on the armor.
+	
+	
+parts class:  //alloys go straight to armor, or parts.  parts do not form armor.??? may change.
+	int 	type						//type of part.
+	float 	weight						// weight of weapon, gotten from weight of all parts.
+	
+	int 	pysical damage type			//piercing, blunt, or slashing type, depends on weapon type.
+	float	physical damage				//amount of damage done by weapon
+	int 	magic damage type[]			//type of magic damage dealt
+	float 	magic damage[]				//amount of magical damage, depends on materials /process for blade	
+	int		passive effects[]			//passive effects of weapon
+	float 	status effects[]			//status effect on the weapon, paralyze, bleed, etc.
+	float	magic channeling			//how well weapon can be used to channel magic for spells.
+		
+		
+		
+		
+alloy material needs:
+	store what materials was made of(eg. %10 adamantium, %90 mithril)
+	store forge temp and time(so player can attempt to re-make)
+
+	properties:
+		magical elements
+		density
+		priority
+		special properties(eg. mithril's magic conductivity, some other materials magical non-conductivity.)
+		hardness: higher is better for blades/piercing
+		durability: higher is better for armor/blunt weapons
+		fogring temp: best temperature at which to forge.  
+		
+		
+		
 Material rarity chart:
 
 common		0
@@ -14,31 +95,28 @@ generic raw material class
 
 properties for each raw material
 
-	int		id									// inside ID of the material, never seen by players
-	string	name								// name of the material, ex Silver, Iron, Wolfsbane
-	int 	properties[]						// any special properties of material, ex stunning, sharpness, easier enchanting?
-	float 	density								// used to find weight when combined with other materials and formed into weapons etc.
-	int 	priority							// priority of materials properties when combined in an alloy or etc.
-	int 	magical_elements[]					// association with magical elements, eg fire, wind, earth, water, etc.
-	int 	material_rarity						// rarity of material, epic, legendary, common, uncommon, unique etc.
-	int 	material_reactants_good[]			// array of ID's of other raw materials it combines well with.
-	int 	material_reactants_bad[]			// array of ID's of other raw materials it doesn't combine well with.
-	int 	processing_temp_min					// minimum temperature needed to process material
-	int		processing_temp_opt					// optimum temperature to process material
-	int		processing_temp_max					// maximum temperature that can be used to process material
-	int		processing_time_var					// amount of variance allowed from optimum processing time 
-	int 	processing_technique_good[]			// array of processing technique ID's that are good to use for this material.  eg, smithing, alchemy, etc.
-	int 	processing_technique_opt			// the ID of the best processing technique for the material.  if not in good or optimal, material has no effect 
-	int 	processing_special_reactans[]		// array of material ID's that have special effects on processing when combined with this material.  eg. drasticaly lowers processing temp.
-
-	function 	processing_temp_time(temp being used)			// returns optimum time to process material based on temperature.  unique to each materialt
-	function 	special_reactions(reactant ID, reactant quantity)				// returns effect of special reactants on material
+int		id;									// inside ID of the material, never seen by players
+	string	name;								// name of the material, ex Silver, Iron, Wolfsbane
+	int 	properties[10];						// any special properties of material, ex stunning, sharpness, easier enchanting?
+	float 	density;							// used to find weight when combined with other materials and formed into weapons etc.
+	float 	priority;							// priority of materials properties when combined in an alloy or etc.
+	int 	magical_elements[10];				// association with magical elements, eg fire, wind, earth, water, etc.
+	int 	rarity;								// rarity of material, epic, legendary, common, uncommon, unique etc.
+	int 	material_reactants_good[10];		// array of ID's of other raw materials it combines well with.
+	int 	material_reactants_bad[10];			// array of ID's of other raw materials it doesn't combine well with.
+	int 	processing_temp_min;				// minimum temperature needed to process material
+	int		processing_temp_opt;				// optimum temperature to process material
+	int		processing_temp_max;				// maximum temperature that can be used to process material
+	int		processing_time_var;				// amount of variance allowed from optimum processing time 
+	int 	processing_technique_good[10];		// array of processing technique ID's that are good to use for this material.  eg, smithing, alchemy, etc.
+	int 	processing_technique_opt;			// the ID of the best processing technique for the material.  if not in good or optimal, material has no effect 
 	
 	
 	example:
 	
 	
 int		id									= 0
+string	type								= Material, ore//not sure on type, used for sorting inventory
 string	name								= "Mithril Ore"
 int 	properties[]						= [5]	//presuming 5 is magical conductivity
 int		priority							= 2		//priority of material properties, higher is better, max is 10, 0 means loses its properties when combined
@@ -54,3 +132,14 @@ int		processing_time_var					= 12	//if optimum time is 60, then variance of 12 m
 int 	processing_technique_good[]			= [3]	//if alchemy has id of 3
 int 	processing_technique_opt			= [1]	//if smithing has id of 1
 int 	processing_special_reactans[]		= [34]	//array of materials that have special effect, is passed to a function to see effects.
+
+
+
+
+
+
+
+
+
+
+
