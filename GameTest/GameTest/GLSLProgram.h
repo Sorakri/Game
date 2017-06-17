@@ -2,6 +2,8 @@
 #include <string>
 #include <GL/glew.h>
 
+
+//Handles the compilation, linking, and usage of a glsl shader program.
 class GLSLProgram
 {
 public:
@@ -13,6 +15,8 @@ public:
 	void linkShaders();
 
 	void addAttribute(const std::string& attributeName);
+
+	GLint getUniformLocation(const std::string& uniformName);
 
 	void use();
 	void unuse();
